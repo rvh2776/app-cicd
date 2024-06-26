@@ -15,10 +15,13 @@ export class WebhookService {
     const repoName = process.env.repoName;
     const hookName = process.env.hookName;
 
+    const fecha = new Date(payload.push_data.pushed_at * 1000).toLocaleString();
+
     if (!payload.repository || !payload.repository.repo_name) {
+      console.log(`Invalid webhook payload - ${fecha}`);
       return res
         .status(HttpStatus.BAD_REQUEST)
-        .json({ message: 'No autorizado' });
+        .json({ message: `Invalid webhook payload - ${fecha}` });
     }
 
     if (
@@ -35,14 +38,14 @@ export class WebhookService {
       }
       this.webhookAceptados[webhookId]++;
       console.log(
-        `Webhook aceptado desde: ${webhookId}: ${this.webhookAceptados[webhookId]}`,
+        `Webhook aceptado desde: ${webhookId}: ${this.webhookAceptados[webhookId]} - ${fecha}`,
       );
 
       // TODO: crear la logica para actualizar la imagen docker.
 
       return res
         .status(HttpStatus.OK)
-        .json({ message: 'Webhook received successfully' });
+        .json({ message: `Webhook received successfully - ${fecha}` });
     } else {
       const webhookId = payload.repository.repo_name;
       if (!this.webhookRechazados[webhookId]) {
@@ -51,12 +54,12 @@ export class WebhookService {
       this.webhookRechazados[webhookId]++;
 
       console.log(
-        `Webhook rechazado desde: ${webhookId}: ${this.webhookRechazados[webhookId]}`,
+        `Webhook rechazado desde: ${webhookId}: ${this.webhookRechazados[webhookId]} - ${fecha}`,
       );
 
       return res
         .status(HttpStatus.BAD_REQUEST)
-        .json({ message: 'Invalid webhook payload' });
+        .json({ message: `Invalid webhook payload - ${fecha}` });
     }
   }
 
