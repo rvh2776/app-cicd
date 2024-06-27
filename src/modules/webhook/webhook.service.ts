@@ -14,8 +14,8 @@ export class WebhookService {
   private webhookRechazados: Record<string, number> = {};
 
   create(payload: CreateWebhookDto, res: Response) {
-    const repoName = process.env.repoName;
-    const hookName = process.env.hookName;
+    const REPO_NAME = process.env.REPO_NAME;
+    const HOOK_NAME = process.env.HOOK_NAME;
 
     const fecha = new Date(payload.push_data.pushed_at * 1000).toLocaleString();
 
@@ -29,8 +29,8 @@ export class WebhookService {
     if (
       payload &&
       payload.repository &&
-      payload.repository.repo_name === repoName &&
-      payload.repository.name === hookName
+      payload.repository.repo_name === REPO_NAME &&
+      payload.repository.name === HOOK_NAME
     ) {
       console.log('Webhook recibido:', payload);
 
