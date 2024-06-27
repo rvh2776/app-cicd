@@ -1,8 +1,7 @@
-# App para crear despliegues a la nube de manera independiente a su tecnología.
+# App para crear despliegues CI/CD.
 
 
 ```
-npm install @types/dotenv --save-dev
 ```
 
 <br>

@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { CreateWebhookDto } from './dto/create-webhook.dto';
 import { config as dotenvConfig } from 'dotenv';
 import { Response } from 'express';
+import { exec } from 'child_process';
 
 dotenvConfig({ path: '.env' });
 
@@ -41,7 +43,14 @@ export class WebhookService {
         `Webhook aceptado desde: ${webhookId}: ${this.webhookAceptados[webhookId]} - ${fecha}`,
       );
 
-      // TODO: crear la logica para actualizar la imagen docker.
+      //? Ejecuto el script para actualizar la imagen Docker.
+      exec('./update_script.sh', (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error ejecutando script: ${error}`);
+          return;
+        }
+        console.log(`${stdout}`);
+      });
 
       return res
         .status(HttpStatus.OK)
