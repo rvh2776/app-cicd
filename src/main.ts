@@ -8,12 +8,17 @@ import { exec } from 'child_process';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  exec('./setup.sh', (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error ejecutando entorno:\n${error}`);
-      return;
-    }
-    console.log(`\nInicio de configuración de entorno.\n\n${stdout}`);
+  //? Ejecutar setup antes de iniciar el proyecto.
+  await new Promise<void>((resolve, reject) => {
+    exec('./setup.sh', (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error ejecutando entorno:\n${error}`);
+        reject(error);
+        return;
+      }
+      console.log(`\nInicio de configuración de entorno.\n\n${stdout}`);
+      resolve();
+    });
   });
 
   //* Validador global de Pipes.
