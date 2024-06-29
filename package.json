@@ -1,8 +1,8 @@
 {
   "name": "app-cicd",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "CI/CD automáticos a servidor desde Docker hub",
+  "author": "Rafael V.H.",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
