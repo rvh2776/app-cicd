@@ -10,13 +10,13 @@ async function bootstrap() {
 
   //? Ejecutar setup antes de iniciar el proyecto.
   await new Promise<void>((resolve, reject) => {
-    exec('./setup.sh', (error, stdout, stderr) => {
+    exec('./src/script/setup.sh', (error, stdout, stderr) => {
       if (error) {
         console.error(`Error ejecutando entorno:\n${error}`);
         reject(error);
         return;
       }
-      console.log(`\nInicio de configuración de entorno.\n\n${stdout}`);
+      console.log(`\n${stdout}`);
       resolve();
     });
   });

@@ -44,7 +44,7 @@ export class WebhookService {
       );
 
       //? Ejecuto el script para actualizar la imagen Docker.
-      exec('./update_script.sh', (error, stdout, stderr) => {
+      exec('./src/script/update_script.sh', (error, stdout, stderr) => {
         if (error) {
           console.error(`Error ejecutando script: ${error}`);
           return;

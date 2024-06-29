@@ -1,0 +1,38 @@
+# version: '3.8'
+
+services:
+  nest-app:
+    # build: ./
+    image: rvh2776/nest-demo:latest  #* En vez de crear una imagen con (buil: ./) directamente me bajo la imagen de Docker hub.
+    ports:
+      - '3001:3001'
+    env_file:
+      - .env.development
+    depends_on:
+      - postgres-db
+    networks:
+      - red-docker #? Le digo a la red que se debe conectar la app.
+
+
+  postgres-db:
+    image: postgres
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    env_file:
+      - .env.development
+    networks:
+      - red-docker #? Le digo a la red que se debe conectar postgres-db.
+
+volumes:
+  postgres-db:
+    external: true #? Le digo a docker que use el volumen ya existente.
+
+networks:
+  red-docker:
+    external: true #? Le digo a docker que use la red ya existente.
+
+
+#? Para levantar el proyecto completo en contenedores: la app + postgresDb ejecutamos: docker compose up
+#* Para verificar siempre si es la ultima imagen docker la que se va a usar: docker compose --pull y despues: docker compose up
