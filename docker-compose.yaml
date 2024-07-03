@@ -1,6 +1,6 @@
 
 services:
-  nest-app:
+  pm4-back:
     # build: ./
     # image: rvh2776/nest-demo:latest  #* En vez de crear una imagen con (buil: ./) directamente me bajo la imagen de Docker hub.
     image: rvh2776/pm4-back:latest  #* En vez de crear una imagen con (buil: ./) directamente me bajo la imagen de Docker hub.
