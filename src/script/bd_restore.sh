@@ -21,3 +21,6 @@ done
 cat $BACKUP_FILE | docker exec -i $CONTAINER_NAME psql -U $DB_USER -d $DB_TO_CONNECT
 
 echo "Restauración de las bases de datos completada.
+
+#? Para crear el backup de la base de datos.
+#* docker exec -t <container_name> pg_dumpall -c -U <db_user> > backup.sql
