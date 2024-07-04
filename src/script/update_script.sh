@@ -22,7 +22,7 @@ echo
 cd "$(dirname "$0")/../../"
 
 #? Ejecutar docker-compose down para detener y eliminar contenedores viejos
-echo -e "${GREEN}   Detendiendo contenedores para actualizar... ${CLEAR}"
+echo -e "${GREEN}   Deteniendo contenedores para actualizar... ${CLEAR}"
 docker-compose down
 
 #? Pull de la última imagen
@@ -33,6 +33,9 @@ docker-compose pull
 echo -e "${GREEN}   Ejecutando actualización... ${CLEAR}"
 docker-compose up -d
 
+#? Eliminar imágenes anteriores
+echo -e "${GREEN}   Eliminando imágen anterior... ${CLEAR}"
+docker image prune -f
 
 echo
 echo -e "${BLUE} App actualizada con exito. ${CLEAR}"
