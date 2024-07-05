@@ -6,7 +6,7 @@ BLUE='\033[0;34m'
 CLEAR="\033[0m"
 
 echo
-echo "--------------------------------------------------"
+echo "-----------------------------------------------------------------------------------------------"
 echo -e "${BLUE} Inicio de actualización. ${CLEAR}"
 echo
 
@@ -35,10 +35,11 @@ docker-compose up -d
 
 #? Eliminar imágenes anteriores
 echo -e "${GREEN}   Eliminando imágen anterior... ${CLEAR}"
+echo
 docker image prune -f
-
+untagged: rvh2776/pm4-back@sha256:2c75d267c824f4faacdd6b677b5ba10609df499f33fd0b49a6d8691aacae59a7
 echo
 echo -e "${BLUE} App actualizada con exito. ${CLEAR}"
-echo "--------------------------------------------------"
+echo "-----------------------------------------------------------------------------------------------"
 
 #? El script tiene que tener permisos de ejecucion: chmod +x /path/to/your/update_script.sh

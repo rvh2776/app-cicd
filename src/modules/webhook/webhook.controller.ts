@@ -1,17 +1,14 @@
-import {
-  Controller,
-  // Get,
-  Post,
-  Body,
-  Res,
-  HttpStatus,
-  // Patch,
-  // Param,
-  // Delete,
-} from '@nestjs/common';
+import { Controller, Post, Body, Res, HttpStatus } from '@nestjs/common';
 import { WebhookService } from './webhook.service';
 import { Response } from 'express';
-// import { CreateWebhookDto } from './dto/create-webhook.dto';
+
+const rojo = '\x1b[31m%s\x1b[0m';
+// const verde = '\x1b[32m%s\x1b[0m';
+// const amarillo = '\x1b[33m%s\x1b[0m';
+// const azul = '\x1b[34m%s\x1b[0m';
+// const magenta = '\x1b[35m%s\x1b[0m';
+// const cian = '\x1b[36m%s\x1b[0m';
+// const blanco = '\x1b[37m%s\x1b[0m';
 
 @Controller('webhook')
 export class WebhookController {
@@ -24,27 +21,8 @@ export class WebhookController {
     }
     const fecha = new Date(payload.push_data.pushed_at * 1000).toLocaleString();
 
-    console.log(`Webhook ignorado - ${fecha}`);
+    console.log(rojo, `Webhook ignorado - ${fecha}`);
+
     return res.status(HttpStatus.OK).json({ message: 'Webhook ignorado' });
   }
-
-  // @Get()
-  // findAll() {
-  //   return this.webhookService.findAll();
-  // }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.webhookService.findOne(+id);
-  // }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateWebhookDto: UpdateWebhookDto) {
-  //   return this.webhookService.update(+id, updateWebhookDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.webhookService.remove(+id);
-  // }
 }
